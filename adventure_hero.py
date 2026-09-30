@@ -439,6 +439,23 @@ def sprite_sheet(scale: int = 4, bg=(96, 84, 110)) -> Image.Image:
     return sheet.resize((sheet.width * scale, sheet.height * scale), Image.NEAREST), rows
 
 
+def overview(scale: int = 3, bg=(96, 84, 110), gap: int = 6) -> Image.Image:
+    """One row per view, all its animations side by side (gap px between animations)."""
+    fw, fh = HERO['front']['stand'][0].size
+    views = ('front', 'back', 'right', 'left')
+    widths = [sum(len(fr) * (fw + 2) for fr in HERO[v].values()) + gap * (len(HERO[v]) - 1)
+              for v in views]
+    sheet = Image.new('RGBA', (max(widths) + 2, len(views) * (fh + 2) + 2), (*bg, 255))
+    for r, v in enumerate(views):
+        x = 2
+        for frames in HERO[v].values():
+            for f in frames:
+                sheet.alpha_composite(f, (x, 2 + r * (fh + 2)))
+                x += fw + 2
+            x += gap
+    return sheet.resize((sheet.width * scale, sheet.height * scale), Image.NEAREST)
+
+
 def save_gif(frames, path, scale=6, ms=150, bg=(96, 84, 110)):
     out = []
     for f in frames:
@@ -453,6 +470,7 @@ if __name__ == '__main__':
     os.makedirs('out', exist_ok=True)
     sheet, rows = sprite_sheet()
     sheet.save('out/hero_sheet.png')
+    overview().save('out/hero_overview.png')
     for v, a, frames in rows:
         print(f'{v:6s} {a:7s} {len(frames)} frame(s)')
         if len(frames) > 1:

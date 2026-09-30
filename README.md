@@ -2,7 +2,7 @@
 
 Eine Spielfigur für ein Point-and-Click-Adventure im Stil von *Maniac Mansion*: männlich, brauner Pferdeschwanz, rotes T-Shirt, Jeans, Turnschuhe. Die Figur steckt komplett im Python-Code. Es gibt keine Bilddateien als Quelle, jedes Einzelbild wird beim Import aus ASCII-Zeilen erzeugt.
 
-![Sprite-Sheet](out/hero_sheet.png)
+![Übersicht: alle Ansichten und Animationen](out/hero_overview.png)
 
 | Laufen vorn | Laufen hinten | Laufen rechts | Reden | Aufheben | Benutzen |
 |---|---|---|---|---|---|
@@ -20,6 +20,7 @@ python3 adventure_hero.py
 Das Skript schreibt nach `out/`:
 
 - `hero_sheet.png`: alle Ansichten und Animationen in einem Sheet (4-fach vergrößert, eine Zeile pro Animation)
+- `hero_overview.png`: kompakte Übersicht mit einer Zeile pro Ansicht (3-fach vergrößert, für diese README)
 - `hero_<ansicht>_<animation>.gif`: jede Animation mit mehr als einem Bild als GIF (6-fach vergrößert)
 
 ## Dateien
