@@ -1,0 +1,4 @@
+sprites.py
+__pycache__/
+*.pyc
+.DS_Store
